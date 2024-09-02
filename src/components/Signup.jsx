@@ -20,7 +20,7 @@ function Signup() {
     };
 
     try {
-      const res = await axios.post("https://book-backend-nine.vercel.app/user/signup", userInfo);
+      const res = await axios.post("https://book-backend-nine.vercel.app", userInfo);
       console.log(res.data);
       if (res.data) {
         toast.success("Signup Successfully");
