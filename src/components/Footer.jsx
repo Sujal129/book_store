@@ -1,8 +1,8 @@
 import React from "react";
-
+import "../css/Footer.css";
 function Footer() {
   return (
-    <div>
+    <div className="footer_div">
       <hr />
       <footer className="footer footer-center p-10 text-base-content rounded dark:bg-slate-900 dark:text-white">
         <nav className="grid grid-flow-col gap-4">
@@ -49,7 +49,7 @@ function Footer() {
           </div>
         </nav>
         <aside>
-          <p>Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
+          <p>Copyright © 2024 - All right reserved by Sujal Gupta</p>
         </aside>
       </footer>
     </div>

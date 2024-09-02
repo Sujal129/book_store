@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from '../context/AuthProvider';
 function Login() {
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
@@ -35,6 +37,9 @@ function Login() {
           setTimeout(() => {}, 2000);
         }
       });
+
+      const user = { userInfo, token: 'dummy-token' }; // Example user object
+      login(user);
   };
   return (
     <div>
