@@ -18,7 +18,7 @@ function Login() {
       password: data.password,
     };
     await axios
-      .post("https://book-backend-nine.vercel.app/", userInfo)
+      .post("https://book-backend-nine.vercel.app/user/login", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
