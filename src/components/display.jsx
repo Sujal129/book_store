@@ -1,32 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "../css/display.css";
-import Data from "../components/list.json";
 import BookCard from "./BookCard.jsx";
+
 function ContactPage() {
-  const booksData = Data.books;
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState([]);
   const [defaultBooks, setDefaultBooks] = useState([]);
-  //   console.log(booksData);
+  const [allBooks, setAllBooks] = useState([]); // Hold all books from API
+
+  useEffect(() => {
+    // Fetch all books from API on mount
+    fetch("http://localhost:4000/book/all")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllBooks(data); // Save full list for filtering
+        const freeBooks = data.filter((book) => book.category === "free");
+        setDefaultBooks(freeBooks);
+      })
+      .catch((err) => console.error("Failed to fetch books:", err));
+  }, []);
 
   const fetchBooks = (query = "") => {
-    // Simulate a search by filtering the local JSON data
     if (query) {
-      setBooks(
-        booksData.filter((book) =>
-          book.title.toLowerCase().includes(query.toLowerCase())
-        )
+      const filtered = allBooks.filter((book) =>
+        book.title.toLowerCase().includes(query.toLowerCase())
       );
+      setBooks(filtered);
     } else {
       setBooks([]);
     }
   };
-
-  useEffect(() => {
-    // Load default books from the JSON file
-    const freeBooks = booksData.filter((book) => book.category === "free");
-    setDefaultBooks(freeBooks);
-  }, [booksData]);
 
   const handleSearch = () => {
     fetchBooks(searchTerm);
@@ -34,9 +37,8 @@ function ContactPage() {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-    handleSearch();
+    fetchBooks(e.target.value);
   };
-  console.log(books);
 
   return (
     <div className="books-container">
@@ -46,23 +48,21 @@ function ContactPage() {
           placeholder="Search for books..."
           value={searchTerm}
           onChange={handleInputChange}
-        /> <br />
+        />
+        <br />
         <button onClick={handleSearch}>Search</button>
       </div>
 
       <div className="book-results">
         {books.length === 0 && searchTerm === "" ? (
-          <div>
-            {/* <h2>Default Books</h2> */}
-            <div className="book-card-container">
-              {defaultBooks.length > 0 ? (
-                defaultBooks.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))
-              ) : (
-                <p>No default books available</p>
-              )}
-            </div>
+          <div className="book-card-container">
+            {defaultBooks.length > 0 ? (
+              defaultBooks.map((book) => (
+                <BookCard key={book.id} book={book} />
+              ))
+            ) : (
+              <p>No default books available</p>
+            )}
           </div>
         ) : (
           <div>

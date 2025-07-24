@@ -4,6 +4,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for v6
 import { useAuth } from "../context/AuthProvider";
+import AddBook from "./addbook"
 import "../css/Navbar.css"
 function Navbar() {
   const { authUser } = useAuth();
@@ -49,6 +50,9 @@ function Navbar() {
       </li>
       <li>
         <Link to="/about">About</Link>
+      </li>
+      <li>
+        <Link to="/addbook">Add Book</Link>
       </li>
     </>
   );

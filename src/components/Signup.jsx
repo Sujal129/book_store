@@ -20,7 +20,7 @@ function Signup() {
     };
 
     try {
-      const res = await axios.post("https://buy-book-backend.onrender.com/user/signup", userInfo, {
+      const res = await axios.post("http://localhost:4000/user/signup", userInfo, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

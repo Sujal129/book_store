@@ -10,6 +10,7 @@ import Footer from "./components/Footer.jsx";
 import Login from "./components/Login.jsx";
 import PaymentPage from "./context/PaymentPage.jsx";
 import About from "./components/About.jsx";
+import AddBook from "./components/addbook.jsx";
 
 function App() {
   const { authUser } = useAuth(); // Destructure the value from useAuth
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/addbook" element={<AddBook />} />
         </Routes>
         <Login />
         <Footer />
